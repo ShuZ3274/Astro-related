@@ -1,0 +1,113 @@
+DATE: 2023-11-24 16:04
+EDITOR: SHU
+CONTEXT:
+    RK4 method added (somehow its performance is worse than Euler, stil need development)
+    3d graphing in the testEnv, with jupiter added
+
+
+
+
+DATE: 2023-11-24 16:36
+EDITOR: SHU
+CONTEXT:
+    An animation in 2d added (with 2 tracer particles)
+COMMENT:
+    I would like to add another class beside from planet, which they don't contribute to gravity field
+    But that will change a lot to the current updating scheme,
+    it's better we do it together.
+
+
+DATE: 2023-11-25 22:22
+EDITOR: LUCA
+CONTEXT:
+    New class SolarSystemPM partially created.
+COMMENT:
+    Whole new class created to handle particle-mesh calculations, methods include grid initializer, mass to density gridder, potential solver, force calculator. 
+    Also added getRadius() to planet class.
+
+DATE: 2023-11-26 17:45
+EDITOR: LUCA
+CONTEXT:
+    New class SolarSystemPMBH partially created.
+COMMENT:
+    Whole new class created to handle Barnes-Hut method calculations, took QuadTree and BH algo from Aaron Nguyen on GitHub https://github.com/ntta/barnes-hut-algorithm 
+    and modified it for our purposes, partially implemented with our objects and nomenclature, yet to test...
+
+
+
+DATE: 2023-11-29 01:58
+EDITOR: SHU
+CONTEXT:
+    GR mode of orbit added
+    Tested with mercury orbit, 2d animation in test.mp4
+COMMENT:
+    It works fine, the semimajpr axis shows angular shift in with time.
+
+
+DATE: 2023-11-30 11:00
+EDITOR: LUCA
+CONTEXT:
+    Added new file for our implementation of Barnes-Hut algorithm, Node2 class created to support QuadTree in SolarSystemPMBH, mostly implemented.
+COMMENT:
+    Next step check that tree creation works and create methods for force calculation, need to look into tree traversal methods, intuition says DFS.
+
+DATE: 2023-12-01 1:00
+EDITOR: LUCA
+CONTEXT:
+    Barnes-Hut implementation complete, finalized methods for computing forces, and taking steps, including with a new Leapfrog integration option, just need and implementation of Orbit().
+COMMENT:
+    Yet to be debugged and/or tested, awaiting group feedback.
+
+
+DATE: 2023-12-01 16:00
+EDITOR: LUCA
+CONTEXT:
+    Barnes-Hut implementation debugged, still work to do.
+COMMENT:
+    Currently working on out of bbox error when creating tree.
+
+DATE: 2023-12-02 14:00
+EDITOR: LUCA
+CONTEXT:
+    Barnes-Hut visualization tool created, debugging of bbox errors also fixed by small logic rework in getQuad().
+COMMENT:
+    Ready for larger scale testing.
+
+DATE: 2023-12-02 16:45
+EDITOR: LUCA, SARA, SHU
+CONTEXT:
+    Barnes-Hut tree creation and force calculation testing (multiple, but low number of objects, n = 15)
+COMMENT:
+    Ready for larger scale testing, think about implementing 'flag' for escaped bodies to exclude them from tree.
+
+DATE: 2023-12-04 08:05
+EDITOR: LUCA
+CONTEXT:
+    Large scale setup with Trojans, Hildas, main belt created, algorithmic analysis performed, results as expected for BH and PP. 
+    Small fix so that a body out of bounds does not cause the program to halt.
+COMMENT:
+    Need to perform long term time evolution of new system setup, also properly analyze runtimes and check against theoretical limit, 
+    expect worse than NlogN since we have dense clustering in small areas of the domain making the average tree depth greater than log_4 N.
+
+
+DATE: 2023-12-05 02:10
+EDITOR: SHU
+CONTEXT:
+    Test_GR renamed to Mercury_w_GR, added test of errors with different number of steps
+    jupyter notebook named Mercury added, the analysis of error behaviours 
+    mercury_pos renamed mercury_ap_peri, now only record aphelion/perihelion data instead of entire trajectory
+COMMENT:
+    RK4 method stil not working porperly, I will put this in disscussion.
+
+DATE 2023-12-05 12:00
+EDITOR: SARA
+CONTEXT:
+    BHV2 renamed to BHClass, unused/imcomplete code moved to archive (barneshut.py, particle mesh simulation)
+    Removed redundencies and added comments for legibility
+COMMENT:
+    TestEnvironment.py still needs some structuring.
+
+DATE: 2023-12-05 11:32
+EDITOR: SHU
+CONTEXT:
+    RK4 method is working poeperly now
